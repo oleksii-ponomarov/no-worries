@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+#results {
+  font: bold 22px "courier new";
+  margin-left: 100px;
+}
+
+.pass {
+  color: #008000;
+}
+
+.fail {
+  color: #ff0000;
+}
+
+.top20 {
+  margin-top: 20px;
+}
+
+/* ============================ */
+#wrap {
+  width: 800px;
+  margin: auto;
+}
+
+#wrap1 {
+  width: 800px;
+  margin: 50px auto 0;
+}
+
+#wrap li {
+  list-style-type: none;
+  border: 1px solid #000000;
+  width: 100px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+#wrap li a {
+  text-decoration: none;
+  text-align: center;
+  font: bold 18px arial;
+  color: orange;
+  display: block;
+}
+
+#wrap li a:hover {
+  text-decoration: underline;
+}
+
+
+.d1 {
+  width: 500px;
+  height: 500px;
+  background: green;
+  text-align: center;
+  margin: auto;
+  line-height: 50px;
+}
+
+.d2 {
+  width: 400px;
+  height: 400px;
+  background: red;
+  text-align: center;
+  margin: auto;
+}
+
+.d3 {
+  width: 300px;
+  height: 300px;
+  background: yellow;
+  text-align: center;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  border: 1px solid gray;
+  width: 100px;
+  text-align: center;
+  padding: 15px;
+}
+
+td a {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  font: 18px arial;
+  color: black;
+}
+
+#result {
+  height: 50px;
+  color: red;
+  font: 24px arial;
+}
+
+
+
+
+/* calc*/
+#d1 {
+  background: #fcc
+}
+
+#d2 {
+  background: #cfc
+}
+
+#d3 {
+  background: #ccf
+}
+
+#d4 {
+  background: #f00
+}
+
+#d5 {
+  background: #0ff
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block
+}
+
+#box span {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.normal {
+  background: #e3e3e3;
+}
+
+.click {
+  background: #000080;
+}
+
+.over {
+  background: #ffff00;
+}
+
+.draggable {
+  position: absolute;
+  cursor: move;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  padding: 10px;
+  min-width: 100px;
+  height: 100px;
+}
+
+.black {
+  background: #000000;
+}
+
+.orange {
+  background: #ffa500;
+}
+
+.green {
+  background: #008000;
+}
+
+.navy {
+  background: #000080;
+}
+
+.red {
+  background: #ff0000;
+}
+
+.blue {
+  background: #0000ff;
+}
+
+.separator {
+  min-height: 300px;
+}
+
+#recycler {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+img {
+  max-width: 100%;
+}

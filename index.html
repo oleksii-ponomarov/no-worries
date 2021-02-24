@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete your worries</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  </head>
+  <body>
+    <div class="container">
+      <h2>Delete your worries</h2>
+      <button class="mb-3 btn-lg btn-primary" id="add">
+        Generate worry
+      </button>
+      <div id="playground">
+      </div>
+      <div class="separator">
+      </div>
+      <div id="recycler"><img src="./recycler.webp"></div>
+      <div class="d-flex justify-content-center">
+        <span id="action" class="text-center"></span>
+      </div>
+    </div>
+    <script>
+      /* Drag and drop elements c использованием событий
+mousedown, mouseup, mousemove */
+
+      const drag = {
+        dragging: false,
+        el: null,
+        relativeTop: 0,
+        relativeLeft: 0,
+        zIndex: 1,
+        setDrag: function(el, x, y) {
+          this.el = el;
+          this.el.style.zIndex = ++this.zIndex;
+          this.relativeLeft = this.el.offsetLeft - x;
+          this.relativeTop = this.el.offsetTop - y;
+        },
+        doDrag: function(x, y) {
+          this.el.style.left = x + this.relativeLeft + "px";
+          this.el.style.top = y + this.relativeTop + "px";
+        }
+      };
+
+      const recycler = document.getElementById("recycler");
+      const recyclerXStart = recycler.offsetLeft;
+      const recyclerXEnd = recycler.offsetLeft + recycler.clientWidth;
+      const recyclerYStart = recycler.offsetTop;
+      const recyclerYEnd = recycler.offsetTop + recycler.clientHeight;
+
+      function removeBox() {
+        drag.el.remove();
+        const action = document.getElementById("action");
+        action.textContent = "That's right!";
+      }
+
+      function handle(e) {
+        e.stopPropagation();
+        const { target, type } = e;
+        let x = e.touches?.length > 0 ? e.touches[0].clientX + document.body.scrollLeft : e.clientX + document.body.scrollLeft;
+        let y = e.touches?.length > 0 ? e.touches[0].clientY + document.body.scrollTop : e.clientY + document.body.scrollTop;
+        switch(type) {
+          case "mousedown":
+            if (target.classList.contains("draggable")) {
+              drag.dragging = true;
+              drag.setDrag(target, x, y);
+            }
+            break;
+          case "touchstart":
+            if (target.classList.contains("draggable")) {
+              drag.dragging = true;
+              drag.setDrag(target, x, y);
+            }
+            break;
+          case "mouseup":
+            drag.dragging = false;
+            if (x >= recyclerXStart && x <= recyclerXEnd && y >= recyclerYStart && y <= recyclerYEnd) {
+              removeBox();
+            }
+            break;
+          case "touchend":
+            x = e.changedTouches[0].pageX;
+            y = e.changedTouches[0].pageY;
+            drag.dragging = false;
+            if (x >= recyclerXStart && x <= recyclerXEnd && y >= recyclerYStart && y <= recyclerYEnd) {
+              removeBox();
+            }
+            break;
+          case "mousemove":
+            if (drag.dragging) {
+              drag.doDrag(x, y);
+            }
+            break;
+          case "touchmove":
+            if (drag.dragging) {
+              drag.doDrag(x, y);
+            }
+            break;
+        }
+      }
+
+      const colors = ["red", "green", "blue", "navy", "black", "orange"];
+      const worries = [
+        "Sadness",
+        "Loneliness",
+        "Bills",
+        "Rent",
+        "Feeling incompetent",
+        "Stress",
+        "Anxiety",
+        "Anger",
+        "Rage",
+        "Annoyance",
+        "Regrets",
+        "Fear"
+      ];
+
+      function getRandom(array) {
+        return array[Math.floor(Math.random() * array.length)];
+      }
+
+      function addEl() {
+        const newBox = document.createElement("div");
+        newBox.className = `box draggable ${getRandom(colors)}`;
+        newBox.textContent = getRandom(worries);
+        const playground = document.getElementById("playground");
+        const addedBox = playground.appendChild(newBox);
+        addedBox.style.left = Math.floor(Math.random() * (window.innerWidth - addedBox.clientWidth)) + "px";
+        addedBox.style.top = Math.floor(Math.random() * (window.innerHeight - addedBox.clientHeight)) + "px";
+        const action = document.getElementById("action");
+        action.textContent = "Drag and drop your worries into the recycler!";
+      }
+
+      const addButton = document.getElementById("add");
+
+      document.addEventListener("mousedown", handle, false);
+      document.addEventListener("touchstart", handle);
+      document.addEventListener("mouseup", handle, false);
+      document.addEventListener("touchend", handle, false);
+      document.addEventListener("mousemove", handle, false);
+      document.addEventListener("touchmove", handle, false);
+      addButton.addEventListener("click", addEl);
+    </script>
+  </body>
+</html>
